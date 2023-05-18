@@ -1,0 +1,333 @@
+## This file contains all the build statements describing the
+# compilation DAG.
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# 
+# Which is the root file.
+# =============================================================================
+
+# =============================================================================
+# Project: TinyKV
+# Configurations: Debug
+# =============================================================================
+
+#############################################
+# Minimal version of Ninja required by this file
+
+ninja_required_version = 1.5
+
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Debug
+# =============================================================================
+# Include auxiliary files.
+
+
+#############################################
+# Include rules file.
+
+include CMakeFiles/rules.ninja
+
+# =============================================================================
+
+#############################################
+# Logical path to working directory; prefix for absolute paths.
+
+cmake_ninja_workdir = /Users/shaoguixin/TinyKV/cmake-build-debug/
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target tinykv_memory
+
+
+#############################################
+# Order-only phony target for tinykv_memory
+
+build cmake_object_order_depends_target_tinykv_memory: phony || CMakeFiles/tinykv_memory.dir
+
+build CMakeFiles/tinykv_memory.dir/src/memory/alloc.cc.o: CXX_COMPILER__tinykv_memory_Debug /Users/shaoguixin/TinyKV/src/memory/alloc.cc || cmake_object_order_depends_target_tinykv_memory
+  DEP_FILE = CMakeFiles/tinykv_memory.dir/src/memory/alloc.cc.o.d
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/Users/shaoguixin/TinyKV/src/include
+  OBJECT_DIR = CMakeFiles/tinykv_memory.dir
+  OBJECT_FILE_DIR = CMakeFiles/tinykv_memory.dir/src/memory
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target tinykv_memory
+
+
+#############################################
+# Link the static library libtinykv_memory.a
+
+build libtinykv_memory.a: CXX_STATIC_LIBRARY_LINKER__tinykv_memory_Debug CMakeFiles/tinykv_memory.dir/src/memory/alloc.cc.o
+  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -g
+  OBJECT_DIR = CMakeFiles/tinykv_memory.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = libtinykv_memory.a
+  TARGET_PDB = tinykv_memory.a.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target memory_pool_test
+
+
+#############################################
+# Order-only phony target for memory_pool_test
+
+build cmake_object_order_depends_target_memory_pool_test: phony || cmake_object_order_depends_target_doctest_with_main cmake_object_order_depends_target_tinykv_memory
+
+build CMakeFiles/memory_pool_test.dir/test/memory/memory_pool_test.cc.o: CXX_COMPILER__memory_pool_test_Debug /Users/shaoguixin/TinyKV/test/memory/memory_pool_test.cc || cmake_object_order_depends_target_memory_pool_test
+  DEP_FILE = CMakeFiles/memory_pool_test.dir/test/memory/memory_pool_test.cc.o.d
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/Users/shaoguixin/TinyKV/src/include -I/Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-src
+  OBJECT_DIR = CMakeFiles/memory_pool_test.dir
+  OBJECT_FILE_DIR = CMakeFiles/memory_pool_test.dir/test/memory
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target memory_pool_test
+
+
+#############################################
+# Link the executable memory_pool_test
+
+build memory_pool_test: CXX_EXECUTABLE_LINKER__memory_pool_test_Debug CMakeFiles/memory_pool_test.dir/test/memory/memory_pool_test.cc.o | _deps/doctest-build/libdoctest_with_main.a libtinykv_memory.a || _deps/doctest-build/libdoctest_with_main.a libtinykv_memory.a
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0
+  LINK_LIBRARIES = _deps/doctest-build/libdoctest_with_main.a  libtinykv_memory.a
+  OBJECT_DIR = CMakeFiles/memory_pool_test.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = memory_pool_test
+  TARGET_PDB = memory_pool_test.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/shaoguixin/TinyKV -B/Users/shaoguixin/TinyKV/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build CMakeFiles/install.util: CUSTOM_COMMAND all
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build install: phony CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build CMakeFiles/install/local.util: CUSTOM_COMMAND all
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build install/local: phony CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build install/strip: phony CMakeFiles/install/strip.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/shaoguixin/TinyKV/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target doctest_with_main
+
+
+#############################################
+# Order-only phony target for doctest_with_main
+
+build cmake_object_order_depends_target_doctest_with_main: phony || _deps/doctest-build/CMakeFiles/doctest_with_main.dir
+
+build _deps/doctest-build/CMakeFiles/doctest_with_main.dir/doctest/parts/doctest.cpp.o: CXX_COMPILER__doctest_with_main_Debug /Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-src/doctest/parts/doctest.cpp || cmake_object_order_depends_target_doctest_with_main
+  DEFINES = -DDOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+  DEP_FILE = _deps/doctest-build/CMakeFiles/doctest_with_main.dir/doctest/parts/doctest.cpp.o.d
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics -std=gnu++11
+  INCLUDES = -I/Users/shaoguixin/TinyKV/src/include -I/Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-src
+  OBJECT_DIR = _deps/doctest-build/CMakeFiles/doctest_with_main.dir
+  OBJECT_FILE_DIR = _deps/doctest-build/CMakeFiles/doctest_with_main.dir/doctest/parts
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target doctest_with_main
+
+
+#############################################
+# Link the static library _deps/doctest-build/libdoctest_with_main.a
+
+build _deps/doctest-build/libdoctest_with_main.a: CXX_STATIC_LIBRARY_LINKER__doctest_with_main_Debug _deps/doctest-build/CMakeFiles/doctest_with_main.dir/doctest/parts/doctest.cpp.o
+  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -g
+  OBJECT_DIR = _deps/doctest-build/CMakeFiles/doctest_with_main.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = _deps/doctest-build/libdoctest_with_main.a
+  TARGET_PDB = doctest_with_main.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build _deps/doctest-build/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-build && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build _deps/doctest-build/edit_cache: phony _deps/doctest-build/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build _deps/doctest-build/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-build && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/shaoguixin/TinyKV -B/Users/shaoguixin/TinyKV/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build _deps/doctest-build/rebuild_cache: phony _deps/doctest-build/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build _deps/doctest-build/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build _deps/doctest-build/CMakeFiles/install.util: CUSTOM_COMMAND _deps/doctest-build/all
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-build && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build _deps/doctest-build/install: phony _deps/doctest-build/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build _deps/doctest-build/CMakeFiles/install/local.util: CUSTOM_COMMAND _deps/doctest-build/all
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-build && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build _deps/doctest-build/install/local: phony _deps/doctest-build/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build _deps/doctest-build/CMakeFiles/install/strip.util: CUSTOM_COMMAND _deps/doctest-build/all
+  COMMAND = cd /Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-build && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build _deps/doctest-build/install/strip: phony _deps/doctest-build/CMakeFiles/install/strip.util
+
+# =============================================================================
+# Target aliases.
+
+build doctest_with_main: phony _deps/doctest-build/libdoctest_with_main.a
+
+build libdoctest_with_main.a: phony _deps/doctest-build/libdoctest_with_main.a
+
+build tinykv_memory: phony libtinykv_memory.a
+
+# =============================================================================
+# Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/shaoguixin/TinyKV/cmake-build-debug
+
+build all: phony libtinykv_memory.a memory_pool_test _deps/doctest-build/all
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-build
+
+build _deps/doctest-build/all: phony
+
+# =============================================================================
+# Built-in targets
+
+
+#############################################
+# Re-run CMake if any of its inputs changed.
+
+build build.ninja: RERUN_CMAKE | /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/BasicConfigVersion-SameMajorVersion.cmake.in /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakePackageConfigHelpers.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckIncludeFile.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckLibraryExists.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FetchContent.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FetchContent/CMakeLists.cmake.in /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindGit.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindThreads.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/WriteBasicConfigVersionFile.cmake /Users/shaoguixin/TinyKV/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake _deps/doctest-src/CMakeLists.txt _deps/doctest-src/scripts/cmake/Config.cmake.in
+  pool = console
+
+
+#############################################
+# A missing CMake input file is not an error.
+
+build /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/BasicConfigVersion-SameMajorVersion.cmake.in /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakePackageConfigHelpers.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckIncludeFile.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckLibraryExists.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FetchContent.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FetchContent/CMakeLists.cmake.in /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindGit.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindThreads.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/WriteBasicConfigVersionFile.cmake /Users/shaoguixin/TinyKV/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake _deps/doctest-src/CMakeLists.txt _deps/doctest-src/scripts/cmake/Config.cmake.in: phony
+
+
+#############################################
+# Clean all the built files.
+
+build clean: CLEAN
+
+
+#############################################
+# Print all primary targets available.
+
+build help: HELP
+
+
+#############################################
+# Make the all target the default.
+
+default all

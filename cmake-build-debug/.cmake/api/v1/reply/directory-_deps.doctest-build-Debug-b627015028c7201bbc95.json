@@ -1,0 +1,101 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"cmake-build-debug/_deps/doctest-src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 135,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 140,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 145,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 150,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "include/doctest",
+			"paths" : 
+			[
+				"cmake-build-debug/_deps/doctest-src/doctest/doctest.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/doctest",
+			"paths" : 
+			[
+				"cmake-build-debug/_deps/doctest-build/generated/doctestConfig.cmake",
+				"cmake-build-debug/_deps/doctest-build/generated/doctestConfigVersion.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/doctest",
+			"paths" : 
+			[
+				"cmake-build-debug/_deps/doctest-src/scripts/cmake/doctest.cmake",
+				"cmake-build-debug/_deps/doctest-src/scripts/cmake/doctestAddTests.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/doctest",
+			"exportName" : "doctestTargets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "doctest::@de8c2d1415f8a28c2e63",
+					"index" : 0
+				}
+			],
+			"paths" : 
+			[
+				"_deps/doctest-build/CMakeFiles/Export/fa5ba3fec28c3a20c06e45fe40ff2f72/doctestTargets.cmake"
+			],
+			"type" : "export"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "_deps/doctest-build",
+		"source" : "cmake-build-debug/_deps/doctest-src"
+	}
+}
