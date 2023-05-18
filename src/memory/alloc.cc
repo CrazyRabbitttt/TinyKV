@@ -1,6 +1,20 @@
-#include "../include/memory/alloc.h"
+#include "memory/alloc.h"
 
 namespace tinykv {
+
+
+
+SimpleFreeListAlloc::~SimpleFreeListAlloc() {
+    // 需要将内存池的内存全部清除掉, slot中的实际位置其实都是在start_pos之后
+    if (!free_list_start_pos_) {
+      auto* curnode = (FreeList*)free_list_start_pos_;
+      while (curnode) {
+        FreeList* nextnode = curnode->next;
+        free(curnode);
+        curnode = nextnode;
+      }
+    }
+}
 
 int32_t SimpleFreeListAlloc::FreeListIndex(int32_t bytes) {
   // first fit policy, 找到刚刚满足bytes的槽
@@ -9,11 +23,15 @@ int32_t SimpleFreeListAlloc::FreeListIndex(int32_t bytes) {
 
 void *SimpleFreeListAlloc::Allocate(int32_t n) {
   assert(n > 0);
+  // 大对象的内存直接使用malloc申请内存
+  if (n > kSmallObjectBytes) {
+      memory_usage_.fetch_add(n, std::memory_order_relaxed);
+      return (char*)malloc(n);
+  }
   FreeList **select_free_list{nullptr};
   // find the target slot
-  int targetIndex = FreeListIndex(n);
-  select_free_list = select_free_list + targetIndex;
-  FreeList *result = select_free_list;
+  select_free_list = select_free_list + FreeListIndex(n);
+  FreeList *result = *(select_free_list);
   if (result == nullptr) {
     void *ret = (char *)ReFill(RoundUp(n));
     return ret;
@@ -25,11 +43,11 @@ void *SimpleFreeListAlloc::Allocate(int32_t n) {
 void *SimpleFreeListAlloc::ReFill(int32_t bytes) {
   // 分配内存，首先试图分配10个chunk块的内存
   static const int kInitChunkNumber = 10;
-  uint32_t real_chunk_number = 10;
+  int32_t real_chunk_number = 10;
   char *alloc_address =
       AllocChunk(bytes, real_chunk_number); // 最终申请到的不一定是10个
   if (real_chunk_number == 1) { // 只申请到了一个chunk，直接返回就好了
-    FreeList *result = reinterpret_cast<FreeList *>(alloc_address);
+    auto *result = reinterpret_cast<FreeList *>(alloc_address);
     return result;
   }
   // 申请的chunk有盈余，将剩余的放到 free list 上
@@ -39,12 +57,12 @@ void *SimpleFreeListAlloc::ReFill(int32_t bytes) {
   FreeList *next{nullptr};
 
   // 留第一个chunk块直接给到user使用
-  new_free_list = reinterpret_cast<FreeList *>(alloc_address + bytes);
-  next = new_free_list freelist_[FreeListIndex(bytes)] = new_free_list;
+  new_free_list = next = reinterpret_cast<FreeList *>(alloc_address + bytes);
+  freelist_[FreeListIndex(bytes)] = new_free_list;
   for (uint32_t curIndex = 1;; ++curIndex) {
     cur = next;
     next = (FreeList *)((char *)next + bytes); // 下一个块的首地址
-    if (curIndex != real_block_count - 1) {
+    if (curIndex != real_chunk_number - 1) {
       cur->next = next;
     } else {
       cur->next = nullptr;
@@ -53,13 +71,13 @@ void *SimpleFreeListAlloc::ReFill(int32_t bytes) {
   }
 
   // 将首个chunk块返回给用户使用
-  FreeList *result = reinterpret_cast<FreeList *>(alloc_address);
+  auto *result = reinterpret_cast<FreeList *>(alloc_address);
   return result;
 }
 
 void SimpleFreeListAlloc::Deallocate(void *address, int32_t size) {
   if (address) {
-    FreeList *p = (FreeList *)address;
+    auto *p = (FreeList *)address;
     FreeList *volatile *cur_free_list = nullptr;
     memory_usage_.fetch_sub(size, std::memory_order_relaxed);
     if (size > kSmallObjectBytes) {
@@ -73,7 +91,6 @@ void SimpleFreeListAlloc::Deallocate(void *address, int32_t size) {
   }
 }
 
-
 void *SimpleFreeListAlloc::ReAllocate(void *address, int curSize, int newSize) {
   Deallocate(address, curSize);
   address = Allocate(newSize);
@@ -84,7 +101,7 @@ char *SimpleFreeListAlloc::AllocChunk(int32_t bytes, int32_t &num) {
   // 期望申请 num 个 bytes 大小的chunk块
   char *result{nullptr};
   int32_t total_bytes = bytes * num;
-  int32_t left_bytes = free_list_end_pos_ - free_list_start_pos_;
+  uint32_t left_bytes = free_list_end_pos_ - free_list_start_pos_;
   if (left_bytes >= total_bytes) {
     // 内存池中的剩余部分足够填充 slot
     result = free_list_start_pos_;
@@ -97,7 +114,7 @@ char *SimpleFreeListAlloc::AllocChunk(int32_t bytes, int32_t &num) {
     result = free_list_start_pos_;
     free_list_start_pos_ += (num * bytes);
     memory_usage_.fetch_add(num * bytes, std::memory_order_relaxed);
-    return result
+    return result;
   } else {
     // 剩余的空间连一个chunk块都填充不了，向OS申请
     // 内存池剩余空间一个都没法分配时
