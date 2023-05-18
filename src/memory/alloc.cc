@@ -73,6 +73,7 @@ void SimpleFreeListAlloc::Deallocate(void *address, int32_t size) {
   }
 }
 
+
 void *SimpleFreeListAlloc::ReAllocate(void *address, int curSize, int newSize) {
   Deallocate(address, curSize);
   address = Allocate(newSize);
