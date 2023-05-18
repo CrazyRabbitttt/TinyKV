@@ -20,11 +20,13 @@ public:
   void *Allocate(int32_t n);
 
 private:
-  int32_t Align(int32_t bytes);             // 字节对齐
-  int32_t RoundUp(int32_t bytes);           // 向上取整
-  int32_t FreeListIndex(int32_t bytes);     // 申请的内存位于哪一个槽
-  void    *ReFill(int32_t bytes);           // 重新将内存填充到 slot 中
-  char    *AllocChunk(int32_t bytes, int32_t &num); // 申请num个bytes大小的chunk块
+  int32_t Align(int32_t bytes);         // 字节对齐
+  int32_t RoundUp(int32_t bytes);       // 向上取整
+  int32_t FreeListIndex(int32_t bytes); // 申请的内存位于哪一个槽
+  void *ReFill(int32_t bytes);          // 重新将内存填充到 slot 中
+  char *AllocChunk(int32_t bytes, int32_t &num); // 申请num个bytes大小的chunk块
+  void Deallocate(void *address, int32_t size);
+  void *ReAllocate(void *address, int curSize, int newSize);
 
   uint32_t MemoryUsage() const {
     return memory_usage_.load(std::memory_order_relaxed);
