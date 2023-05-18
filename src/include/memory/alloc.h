@@ -44,8 +44,8 @@ private:
   char *free_list_start_pos_{nullptr};
   char *free_list_end_pos_{nullptr};
   int32_t heap_size_{0};
-  std::atomic<int> memory_usage_{0};
-  FreeList *freelist_[kFreeListNum]{nullptr};
+  std::atomic<uint32_t> memory_usage_{0};
+  FreeList *freelist_[kFreeListNum] = {nullptr};
 };
 
 } // namespace tinykv

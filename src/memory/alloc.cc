@@ -30,8 +30,8 @@ void *SimpleFreeListAlloc::Allocate(int32_t n) {
   }
   FreeList **select_free_list{nullptr};
   // find the target slot
-  select_free_list = select_free_list + FreeListIndex(n);
-  FreeList *result = *(select_free_list);
+  select_free_list = freelist_ + FreeListIndex(n);
+  FreeList *result = *select_free_list;
   if (result == nullptr) {
     void *ret = (char *)ReFill(RoundUp(n));
     return ret;

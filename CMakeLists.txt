@@ -30,10 +30,8 @@ SET(TINYKV_SRC_TEST_DIR ${PROJECT_SOURCE_DIR}/test)
 #SET(TINYKV_SRC_DEMO_DIR ${PROJECT_SOURCE_DIR}/src)
 
 
-
 include_directories(${TINYKV_SRC_INCLUDE_DIR})
 message(${TINYKV_SRC_INCLUDE_DIR})
-
 
 #############################################
 ## Build
@@ -65,7 +63,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(doctest)
 
 ADD_EXECUTABLE(memory_pool_test ${TINYKV_SRC_TEST_DIR}/memory/memory_pool_test.cc)
-target_link_libraries(memory_pool_test doctest_with_main)
+target_link_libraries(memory_pool_test doctest_with_main tinykv_memory)
 
 
 
