@@ -39,6 +39,16 @@ message(${TINYKV_SRC_INCLUDE_DIR})
 #############################################
 set(CMAKE_COMPILER_FLAG -O3 -Wall -g -Werror)
 
+# Build the util_library
+FILE(GLOB TINYKV_UTIL_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} "src/util/*.cc")
+ADD_LIBRARY(tinykv_util ${TINYKV_UTIL_SOURCE})
+TARGET_LINK_LIBRARIES(tinykv_util Threads::Threads)
+TARGET_COMPILE_OPTIONS(tinykv_util PRIVATE ${CMAKE_COMPILE_FLAG})
+target_include_directories(
+        tinykv_util
+        PUBLIC ${TINYKV_SRC_INCLUDE_DIR}
+)
+
 # Build the memory_pool_library
 FILE(GLOB TINYKV_MEMORY_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} "src/memory/*.cc")
 ADD_LIBRARY(tinykv_memory ${TINYKV_MEMORY_SOURCE})
@@ -46,6 +56,16 @@ TARGET_LINK_LIBRARIES(tinykv_memory Threads::Threads)
 TARGET_COMPILE_OPTIONS(tinykv_memory PRIVATE ${CMAKE_COMPILE_FLAG})
 target_include_directories(
         tinykv_memory
+        PUBLIC ${TINYKV_SRC_INCLUDE_DIR}
+)
+
+# Build the bloomfilter_library
+FILE(GLOB TINYKV_FILTER_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} "src/filter/*.cc")
+ADD_LIBRARY(tinykv_filter ${TINYKV_FILTER_SOURCE})
+TARGET_LINK_LIBRARIES(tinykv_filter Threads::Threads tinykv_util)
+TARGET_COMPILE_OPTIONS(tinykv_filter PRIVATE ${CMAKE_COMPILE_FLAG})
+target_include_directories(
+        tinykv_filter
         PUBLIC ${TINYKV_SRC_INCLUDE_DIR}
 )
 
@@ -64,9 +84,10 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(doctest)
 
 ADD_EXECUTABLE(memory_pool_test ${TINYKV_SRC_TEST_DIR}/memory/memory_pool_test.cc)
-target_link_libraries(memory_pool_test doctest_with_main tinykv_memory)
+target_link_libraries(memory_pool_test doctest_with_main tinykv_memory tinykv_util)
 
-
+ADD_EXECUTABLE(bloomfilter_test ${TINYKV_SRC_TEST_DIR}/bloomfilter/bloomfilter_test.cc)
+target_link_libraries(bloomfilter_test doctest_with_main tinykv_filter)
 
 
 

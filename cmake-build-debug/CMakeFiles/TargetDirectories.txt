@@ -1,5 +1,8 @@
+/Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/tinykv_util.dir
 /Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/tinykv_memory.dir
+/Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/tinykv_filter.dir
 /Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/memory_pool_test.dir
+/Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/bloomfilter_test.dir
 /Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/list_install_components.dir

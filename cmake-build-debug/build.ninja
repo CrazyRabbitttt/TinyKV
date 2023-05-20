@@ -38,6 +38,53 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /Users/shaoguixin/TinyKV/cmake-build-debug/
 # =============================================================================
+# Object build statements for STATIC_LIBRARY target tinykv_util
+
+
+#############################################
+# Order-only phony target for tinykv_util
+
+build cmake_object_order_depends_target_tinykv_util: phony || CMakeFiles/tinykv_util.dir
+
+build CMakeFiles/tinykv_util.dir/src/util/code_util.cc.o: CXX_COMPILER__tinykv_util_Debug /Users/shaoguixin/TinyKV/src/util/code_util.cc || cmake_object_order_depends_target_tinykv_util
+  DEP_FILE = CMakeFiles/tinykv_util.dir/src/util/code_util.cc.o.d
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/Users/shaoguixin/TinyKV/src/include
+  OBJECT_DIR = CMakeFiles/tinykv_util.dir
+  OBJECT_FILE_DIR = CMakeFiles/tinykv_util.dir/src/util
+
+build CMakeFiles/tinykv_util.dir/src/util/crc32.cc.o: CXX_COMPILER__tinykv_util_Debug /Users/shaoguixin/TinyKV/src/util/crc32.cc || cmake_object_order_depends_target_tinykv_util
+  DEP_FILE = CMakeFiles/tinykv_util.dir/src/util/crc32.cc.o.d
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/Users/shaoguixin/TinyKV/src/include
+  OBJECT_DIR = CMakeFiles/tinykv_util.dir
+  OBJECT_FILE_DIR = CMakeFiles/tinykv_util.dir/src/util
+
+build CMakeFiles/tinykv_util.dir/src/util/hash_util.cc.o: CXX_COMPILER__tinykv_util_Debug /Users/shaoguixin/TinyKV/src/util/hash_util.cc || cmake_object_order_depends_target_tinykv_util
+  DEP_FILE = CMakeFiles/tinykv_util.dir/src/util/hash_util.cc.o.d
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/Users/shaoguixin/TinyKV/src/include
+  OBJECT_DIR = CMakeFiles/tinykv_util.dir
+  OBJECT_FILE_DIR = CMakeFiles/tinykv_util.dir/src/util
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target tinykv_util
+
+
+#############################################
+# Link the static library libtinykv_util.a
+
+build libtinykv_util.a: CXX_STATIC_LIBRARY_LINKER__tinykv_util_Debug CMakeFiles/tinykv_util.dir/src/util/code_util.cc.o CMakeFiles/tinykv_util.dir/src/util/crc32.cc.o CMakeFiles/tinykv_util.dir/src/util/hash_util.cc.o
+  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -g
+  OBJECT_DIR = CMakeFiles/tinykv_util.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = libtinykv_util.a
+  TARGET_PDB = tinykv_util.a.dbg
+
+# =============================================================================
 # Object build statements for STATIC_LIBRARY target tinykv_memory
 
 
@@ -71,13 +118,46 @@ build libtinykv_memory.a: CXX_STATIC_LIBRARY_LINKER__tinykv_memory_Debug CMakeFi
   TARGET_PDB = tinykv_memory.a.dbg
 
 # =============================================================================
+# Object build statements for STATIC_LIBRARY target tinykv_filter
+
+
+#############################################
+# Order-only phony target for tinykv_filter
+
+build cmake_object_order_depends_target_tinykv_filter: phony || cmake_object_order_depends_target_tinykv_util
+
+build CMakeFiles/tinykv_filter.dir/src/filter/bloomfilter.cc.o: CXX_COMPILER__tinykv_filter_Debug /Users/shaoguixin/TinyKV/src/filter/bloomfilter.cc || cmake_object_order_depends_target_tinykv_filter
+  DEP_FILE = CMakeFiles/tinykv_filter.dir/src/filter/bloomfilter.cc.o.d
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/Users/shaoguixin/TinyKV/src/include
+  OBJECT_DIR = CMakeFiles/tinykv_filter.dir
+  OBJECT_FILE_DIR = CMakeFiles/tinykv_filter.dir/src/filter
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target tinykv_filter
+
+
+#############################################
+# Link the static library libtinykv_filter.a
+
+build libtinykv_filter.a: CXX_STATIC_LIBRARY_LINKER__tinykv_filter_Debug CMakeFiles/tinykv_filter.dir/src/filter/bloomfilter.cc.o || libtinykv_util.a
+  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -g
+  OBJECT_DIR = CMakeFiles/tinykv_filter.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = libtinykv_filter.a
+  TARGET_PDB = tinykv_filter.a.dbg
+
+# =============================================================================
 # Object build statements for EXECUTABLE target memory_pool_test
 
 
 #############################################
 # Order-only phony target for memory_pool_test
 
-build cmake_object_order_depends_target_memory_pool_test: phony || cmake_object_order_depends_target_doctest_with_main cmake_object_order_depends_target_tinykv_memory
+build cmake_object_order_depends_target_memory_pool_test: phony || cmake_object_order_depends_target_doctest_with_main cmake_object_order_depends_target_tinykv_memory cmake_object_order_depends_target_tinykv_util
 
 build CMakeFiles/memory_pool_test.dir/test/memory/memory_pool_test.cc.o: CXX_COMPILER__memory_pool_test_Debug /Users/shaoguixin/TinyKV/test/memory/memory_pool_test.cc || cmake_object_order_depends_target_memory_pool_test
   DEP_FILE = CMakeFiles/memory_pool_test.dir/test/memory/memory_pool_test.cc.o.d
@@ -94,14 +174,47 @@ build CMakeFiles/memory_pool_test.dir/test/memory/memory_pool_test.cc.o: CXX_COM
 #############################################
 # Link the executable memory_pool_test
 
-build memory_pool_test: CXX_EXECUTABLE_LINKER__memory_pool_test_Debug CMakeFiles/memory_pool_test.dir/test/memory/memory_pool_test.cc.o | _deps/doctest-build/libdoctest_with_main.a libtinykv_memory.a || _deps/doctest-build/libdoctest_with_main.a libtinykv_memory.a
+build memory_pool_test: CXX_EXECUTABLE_LINKER__memory_pool_test_Debug CMakeFiles/memory_pool_test.dir/test/memory/memory_pool_test.cc.o | _deps/doctest-build/libdoctest_with_main.a libtinykv_memory.a libtinykv_util.a || _deps/doctest-build/libdoctest_with_main.a libtinykv_memory.a libtinykv_util.a
   FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0
-  LINK_LIBRARIES = _deps/doctest-build/libdoctest_with_main.a  libtinykv_memory.a
+  LINK_LIBRARIES = _deps/doctest-build/libdoctest_with_main.a  libtinykv_memory.a  libtinykv_util.a
   OBJECT_DIR = CMakeFiles/memory_pool_test.dir
   POST_BUILD = :
   PRE_LINK = :
   TARGET_FILE = memory_pool_test
   TARGET_PDB = memory_pool_test.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target bloomfilter_test
+
+
+#############################################
+# Order-only phony target for bloomfilter_test
+
+build cmake_object_order_depends_target_bloomfilter_test: phony || cmake_object_order_depends_target_doctest_with_main cmake_object_order_depends_target_tinykv_filter cmake_object_order_depends_target_tinykv_util
+
+build CMakeFiles/bloomfilter_test.dir/test/bloomfilter/bloomfilter_test.cc.o: CXX_COMPILER__bloomfilter_test_Debug /Users/shaoguixin/TinyKV/test/bloomfilter/bloomfilter_test.cc || cmake_object_order_depends_target_bloomfilter_test
+  DEP_FILE = CMakeFiles/bloomfilter_test.dir/test/bloomfilter/bloomfilter_test.cc.o.d
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0 -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/Users/shaoguixin/TinyKV/src/include -I/Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-src
+  OBJECT_DIR = CMakeFiles/bloomfilter_test.dir
+  OBJECT_FILE_DIR = CMakeFiles/bloomfilter_test.dir/test/bloomfilter
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target bloomfilter_test
+
+
+#############################################
+# Link the executable bloomfilter_test
+
+build bloomfilter_test: CXX_EXECUTABLE_LINKER__bloomfilter_test_Debug CMakeFiles/bloomfilter_test.dir/test/bloomfilter/bloomfilter_test.cc.o | _deps/doctest-build/libdoctest_with_main.a libtinykv_filter.a libtinykv_util.a || _deps/doctest-build/libdoctest_with_main.a libtinykv_filter.a libtinykv_util.a
+  FLAGS = -std=c++17 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=12.0
+  LINK_LIBRARIES = _deps/doctest-build/libdoctest_with_main.a  libtinykv_filter.a  libtinykv_util.a
+  OBJECT_DIR = CMakeFiles/bloomfilter_test.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = bloomfilter_test
+  TARGET_PDB = bloomfilter_test.dbg
 
 
 #############################################
@@ -279,7 +392,11 @@ build doctest_with_main: phony _deps/doctest-build/libdoctest_with_main.a
 
 build libdoctest_with_main.a: phony _deps/doctest-build/libdoctest_with_main.a
 
+build tinykv_filter: phony libtinykv_filter.a
+
 build tinykv_memory: phony libtinykv_memory.a
+
+build tinykv_util: phony libtinykv_util.a
 
 # =============================================================================
 # Folder targets.
@@ -289,7 +406,7 @@ build tinykv_memory: phony libtinykv_memory.a
 #############################################
 # Folder: /Users/shaoguixin/TinyKV/cmake-build-debug
 
-build all: phony libtinykv_memory.a memory_pool_test _deps/doctest-build/all
+build all: phony libtinykv_util.a libtinykv_memory.a libtinykv_filter.a memory_pool_test bloomfilter_test _deps/doctest-build/all
 
 # =============================================================================
 
