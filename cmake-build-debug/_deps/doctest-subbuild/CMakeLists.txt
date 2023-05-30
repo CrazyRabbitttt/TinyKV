@@ -13,9 +13,9 @@ project(doctest-populate NONE)
 # Pass through things we've already detected in the main project to avoid
 # paying the cost of redetecting them again in ExternalProject_Add()
 set(GIT_EXECUTABLE [==[/opt/homebrew/bin/git]==])
-set(GIT_VERSION_STRING [==[2.38.1]==])
+set(GIT_VERSION_STRING [==[]==])
 set_property(GLOBAL PROPERTY _CMAKE_FindGit_GIT_EXECUTABLE_VERSION
-  [==[/opt/homebrew/bin/git;2.38.1]==]
+  [==[/opt/homebrew/bin/git;]==]
 )
 
 

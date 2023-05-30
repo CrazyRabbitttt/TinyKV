@@ -18,7 +18,6 @@ MESSAGE("The environment system : ${CMAKE_SYSTEM_NAME}")
 SET(THREADS_PREFER_PTHREAD_FLAG ON)
 FIND_PACKAGE(Threads REQUIRED)
 
-
 set(TINYKV_BUILD_SUPPORT_DIR  "${CMAKE_SOURCE_DIR}/build_support")
 
 #############################################
@@ -46,7 +45,7 @@ TARGET_LINK_LIBRARIES(tinykv_util Threads::Threads)
 TARGET_COMPILE_OPTIONS(tinykv_util PRIVATE ${CMAKE_COMPILE_FLAG})
 target_include_directories(
         tinykv_util
-        PUBLIC ${TINYKV_SRC_INCLUDE_DIR}
+        PUBLIC ${TINYKV_SRC_INCLUDE_DIR}        #将include目录暴露出来
 )
 
 # Build the memory_pool_library
@@ -68,6 +67,17 @@ target_include_directories(
         tinykv_filter
         PUBLIC ${TINYKV_SRC_INCLUDE_DIR}
 )
+
+# Build the wal_library
+FILE(GLOB TINYKV_WAL_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} "src/wal/*.cc")
+ADD_LIBRARY(tinykv_wal ${TINYKV_FILTER_SOURCE})
+TARGET_LINK_LIBRARIES(tinykv_wal Threads::Threads tinykv_util)
+TARGET_COMPILE_OPTIONS(tinykv_wal PRIVATE ${CMAKE_COMPILE_FLAG})
+target_include_directories(
+        tinykv_wal
+        PUBLIC ${TINYKV_SRC_INCLUDE_DIR}
+)
+
 
 #############################################
 ## Test (Doctest)

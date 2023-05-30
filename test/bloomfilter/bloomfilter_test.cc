@@ -12,6 +12,7 @@
 
 using namespace tinykv;
 using namespace std;
+using namespace tinykv::util;
 
 
 static const vector<string> kTestKeys = {
@@ -37,7 +38,6 @@ TEST_CASE("bloomFilter test") {
          << ", has_existed:" << filter_policy->MayMatch(it, 0, 0) << " ]"
          << endl;
   }
-
 }
 
 
