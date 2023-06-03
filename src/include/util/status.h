@@ -10,6 +10,9 @@ enum StatusCode {
 
 class Status {
 public:
+  Status();
+  Status(const StatusCode& code)
+      : status_code_(code) {}
   bool IfOk() { return status_code_ == Ok; }
   bool IfError() { return status_code_ == Error; }
   StatusCode GetStatus() { return status_code_; }
