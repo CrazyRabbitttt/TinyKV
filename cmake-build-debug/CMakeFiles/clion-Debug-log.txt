@@ -1,27 +1,7 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/shaoguixin/TinyKV -B /Users/shaoguixin/TinyKV/cmake-build-debug
 The environment system : Darwin
 /Users/shaoguixin/TinyKV/src/include
-CMake Error at /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/ExternalProject.cmake:2676 (message):
-  git version 1.6.5 or later required for --recursive flag with 'git
-  submodule ...': GIT_VERSION_STRING=''
-Call Stack (most recent call first):
-  /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/ExternalProject.cmake:2793 (_ep_get_git_submodules_recurse)
-  /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/ExternalProject.cmake:4170 (_ep_add_download_command)
-  CMakeLists.txt:23 (ExternalProject_Add)
-
-
--- Configuring incomplete, errors occurred!
-See also "/Users/shaoguixin/TinyKV/cmake-build-debug/_deps/doctest-subbuild/CMakeFiles/CMakeOutput.log".
-
-CMake Error at /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FetchContent.cmake:1592 (message):
-  CMake step for doctest failed: 1
-Call Stack (most recent call first):
-  /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FetchContent.cmake:1744:EVAL:2 (__FetchContent_directPopulate)
-  /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FetchContent.cmake:1744 (cmake_language)
-  /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FetchContent.cmake:1958 (FetchContent_Populate)
-  CMakeLists.txt:94 (FetchContent_MakeAvailable)
-
-
--- Configuring incomplete, errors occurred!
-See also "/Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/CMakeOutput.log".
-See also "/Users/shaoguixin/TinyKV/cmake-build-debug/CMakeFiles/CMakeError.log".
+build the wal module
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/shaoguixin/TinyKV/cmake-build-debug

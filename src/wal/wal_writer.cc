@@ -54,10 +54,15 @@ Status Writer::DumpRecordToPhysical(RecordType type, const char *ptr,
   header_buf[4] = static_cast<char>(length & 0xff);
   header_buf[5] = static_cast<char>(length >> 8);
   header_buf[6] = static_cast<char>(type);
-  uint32_t crc_check_sum = 123; // checksum
+  uint32_t tmp_crc_check_sum = 123; // checksum
   // todo : add crc check sum
-  util::EncodeFixed32(header_buf, crc_check_sum);
-  auto res = dest_->Append(Slice(header_buf));
+  util::EncodeFixed32(header_buf, tmp_crc_check_sum);
+  std::cout << "debug" << header_buf << std::endl;
+  for (int i = 0; i < 7; i++) {
+    std::cout << header_buf[i] << " ";
+  }
+  std::cout << std::endl;
+  auto res = dest_->Append(Slice(header_buf, 7));
   if (res.IfOk()) {
     res = dest_->Append(Slice(ptr, length));
     if (res.IfOk()) {

@@ -5,8 +5,8 @@
 #ifndef TINYKV_SLICE_H
 #define TINYKV_SLICE_H
 
-#include <assert.h>
-#include <string.h>
+#include <cassert>
+#include <cstring>
 #include <string>
 
 namespace tinykv {
@@ -18,7 +18,7 @@ public:
 
   Slice(const char *data, size_t len) : data_(data), size_(len) {}
 
-  Slice(const std::string &s) : data_(s.data()), size_(s.size()) {}
+  explicit Slice(const std::string &s) : data_(s.data()), size_(s.size()) {}
 
   Slice(const char *data) : data_(data), size_(strlen(data)) {}
 
@@ -47,7 +47,7 @@ public:
   }
 
   // Use move decrease the consume of copy
-  std::string ToString() const { return std::move(std::string(data_, size_)); }
+  std::string ToString() const { return std::string(data_, size_); }
 
   int compare(const Slice &b) const;
 

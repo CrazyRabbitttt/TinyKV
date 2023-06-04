@@ -8,24 +8,24 @@
 
 class WritableFile;
 
-namespace tinykv {
-namespace wal {
+namespace tinykv::wal {
 
 class Writer {
 public:
+  explicit Writer(WritableFile *writable_file)
+      : dest_(writable_file) {}
   Status AddRecord(const Slice& slice);     // add record, the open api exposed to external
-
-private:
+//private:
+public:
   Status DumpRecordToPhysical(RecordType type, const char* ptr, int length);
 
 private:
   int current_block_offset_{0};   // 在当前block的偏移数值
   WritableFile *dest_{nullptr};
-  uint32_t crc_check_sum[4+1];
+//  uint32_t crc_check_sum[4+1]{0};
 };
 
 
-}
 } // namespace tinykv
 
 #endif

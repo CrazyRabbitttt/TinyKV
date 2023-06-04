@@ -15,22 +15,25 @@ void PutFixed64(std::string *dst, uint32_t value) {
 }
 
 void EncodeFixed32(char *buf, uint32_t value) {
-  // 将 value 写进buf 中
-  buf[0] = value & 0xff;
-  buf[1] = (value >> 8) & 0xff;
-  buf[2] = (value >> 16) & 0xff;
-  buf[3] = (value >> 24) & 0xff;
+  uint8_t* const buffer = reinterpret_cast<uint8_t*>(buf);
+  buffer[0] = static_cast<uint8_t>(value);
+  buffer[1] = static_cast<uint8_t>(value >> 8);
+  buffer[2] = static_cast<uint8_t>(value >> 16);
+  buffer[3] = static_cast<uint8_t>(value >> 24);
 }
 
 void EncodeFixed64(char *buf, uint64_t value) {
-  buf[0] = value & 0xff;
-  buf[1] = (value >> 8) & 0xff;
-  buf[2] = (value >> 16) & 0xff;
-  buf[3] = (value >> 24) & 0xff;
-  buf[4] = (value >> 32) & 0xff;
-  buf[5] = (value >> 40) & 0xff;
-  buf[6] = (value >> 48) & 0xff;
-  buf[7] = (value >> 56) & 0xff;
+  uint8_t* const buffer = reinterpret_cast<uint8_t*>(buf);
+
+  // Recent clang and gcc optimize this to a single mov / str instruction.
+  buffer[0] = static_cast<uint8_t>(value);
+  buffer[1] = static_cast<uint8_t>(value >> 8);
+  buffer[2] = static_cast<uint8_t>(value >> 16);
+  buffer[3] = static_cast<uint8_t>(value >> 24);
+  buffer[4] = static_cast<uint8_t>(value >> 32);
+  buffer[5] = static_cast<uint8_t>(value >> 40);
+  buffer[6] = static_cast<uint8_t>(value >> 48);
+  buffer[7] = static_cast<uint8_t>(value >> 56);
 }
 
 char *EncodeVarint32(char *dst, uint32_t value) {
@@ -73,7 +76,6 @@ char *EncodeVarint64(char *dst, uint64_t v) {
 }
 
 inline uint32_t DecodeFixed32(const char *ptr) {
-  const uint8_t *buffer = reinterpret_cast<const uint8_t *>(ptr);
   return static_cast<uint32_t>(ptr[0]) | static_cast<uint32_t>(ptr[1] << 8) |
          static_cast<uint32_t>(ptr[2] << 16) |
          static_cast<uint32_t>(ptr[3] << 24);

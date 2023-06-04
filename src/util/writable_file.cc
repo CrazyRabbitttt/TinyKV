@@ -4,12 +4,14 @@ namespace tinykv {
 
 
 CommonWritableFile::CommonWritableFile(const std::string &filename)
-    : file_name_(std::move(filename)),
-      fstream_(filename, std::fstream::out | std::fstream::trunc) {}
+    : fstream_(filename, std::fstream::out | std::fstream::trunc),
+      file_name_(filename),
+      dir_name_(Dirname(filename)) {}
 
 // 使用的是 fstream
 // 直接进行数据的写入，能够全部一次性写入（和::write不同，如果说缓冲区满了内部会自动刷盘的）
 void CommonWritableFile::DirectWrite(const char *data, size_t size) {
+  std::cout << "going to write data(size):" << size << "," <<  data << std::endl;
   fstream_.write(data, size);
 }
 
@@ -37,6 +39,7 @@ Status CommonWritableFile::Append(const Slice &data) {
   write_data += minsize;
   cur_pos_ += minsize;
   if (write_size == 0) {
+    std::cout << "written in buf, the data:" << strlen(buf_) << "," << buf_ << std::endl;
     return Status(StatusCode::Ok);
   }
   // 没写完, 需要刷盘然后判断剩余的是否能够直接放进buffer中

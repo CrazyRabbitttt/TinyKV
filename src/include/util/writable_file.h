@@ -17,9 +17,7 @@ public:
 
   WritableFile(const WritableFile &) = delete;
   WritableFile &operator=(const WritableFile &) = delete;
-
-  virtual ~WritableFile();
-
+  virtual ~WritableFile()=default;
   virtual Status Append(const Slice &data) = 0;
   virtual Status Flush() = 0;
   virtual Status Close() = 0;
@@ -28,19 +26,19 @@ public:
 
 constexpr const int kWritableFileBufferSize = 64 * 1024;
 
-class CommonWritableFile : WritableFile {
+class CommonWritableFile : public WritableFile {
 public:
   CommonWritableFile() = default;
-  CommonWritableFile(const std::string &filename);
-  ~CommonWritableFile() {
+  explicit CommonWritableFile(const std::string &filename);
+  ~CommonWritableFile() override {
     fstream_.flush();
     fstream_.close();
   }
 
-  Status Append(const Slice &data);
-  Status Flush();
-  Status Close();
-  Status Fsync();
+  Status Append(const Slice &data) override;
+  Status Flush() override;
+  Status Close() override;
+  Status Fsync() override;
 
 private:
   Status FlushBuffer();
@@ -48,7 +46,7 @@ private:
   std::string Dirname(const std::string& filename);
 
 private:
-  char buf_[kWritableFileBufferSize];
+  char buf_[kWritableFileBufferSize]{};
   size_t cur_pos_{0};
   std::fstream fstream_;
   std::string file_name_{};
