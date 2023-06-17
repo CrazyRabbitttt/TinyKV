@@ -54,10 +54,10 @@ Status Writer::DumpRecordToPhysical(RecordType type, const char *ptr,
   header_buf[4] = static_cast<char>(length & 0xff);
   header_buf[5] = static_cast<char>(length >> 8);
   header_buf[6] = static_cast<char>(type);
-  uint32_t tmp_crc_check_sum = 123; // checksum
+  uint32_t tmp_crc_check_sum = 4123333; // checksum
   // todo : add crc check sum
   util::EncodeFixed32(header_buf, tmp_crc_check_sum);
-  std::cout << "debug" << header_buf << std::endl;
+  std::cout << "debug" << header_buf << "====" << std::endl;
   for (int i = 0; i < 7; i++) {
     std::cout << header_buf[i] << " ";
   }
@@ -74,6 +74,11 @@ Status Writer::DumpRecordToPhysical(RecordType type, const char *ptr,
   current_block_offset_ += kHeaderLen + length;
   return res;
 }
+
+Status Writer::CloseFile() {
+  return dest_->Close();
+}
+
 
 } // namespace wal
 

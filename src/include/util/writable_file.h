@@ -31,6 +31,7 @@ public:
   CommonWritableFile() = default;
   explicit CommonWritableFile(const std::string &filename);
   ~CommonWritableFile() override {
+    printf("The common writable file's destructor function is running....");
     fstream_.flush();
     fstream_.close();
   }
@@ -40,9 +41,10 @@ public:
   Status Close() override;
   Status Fsync() override;
 
+  void DirectWrite(const char *data, size_t size);
 private:
   Status FlushBuffer();
-  void DirectWrite(const char *data, size_t size);
+//  void DirectWrite(const char *data, size_t size);
   std::string Dirname(const std::string& filename);
 
 private:

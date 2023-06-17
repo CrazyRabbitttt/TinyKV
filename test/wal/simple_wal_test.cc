@@ -21,10 +21,13 @@ int main() {
   std::cout << "Beginning the test of write ahead log...\n";
   const std::string dirname = Dirname1(__FILE__);
   std::cout << dirname << endl;
-  const std::string filename = dirname + "/wal_test.wal";
+  const std::string filename = dirname + "/wal_test_file.txt";
+//  const std::string tmp_filename = dirname + "/tmp_test";
   tinykv::WritableFile* dest = new CommonWritableFile(filename);
   Writer wal_writer(dest);
 
-  wal_writer.AddRecord("shaoguixin alaways like the ice, lalalalalala....");
+//  std::string tmp{"shaoguixin alaways like the ice, lalalalalala...."};
+//  wal_writer.DumpRecordToPhysical(RecordType(tinykv::wal::kFullType), tmp.data(), tmp.length());
+  wal_writer.AddRecord("shaoguixin alaways like the ice, hahahahhahaha....");
   std::cout << "Finished the writing..\n";
 }
